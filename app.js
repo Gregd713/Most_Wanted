@@ -16,8 +16,8 @@ function app(people) {
     case "yes":
       searchResults = searchByName(people);
       break;
-    case "no":
-      // TODO: search by traits
+    case "no": //search by trait function
+      searchResults = searchByTrait(people);
       break;
     default:
       app(people); // restart app
@@ -82,18 +82,35 @@ function searchByName(people) {
     if (
       potentialMatch.firstName === firstName &&
       potentialMatch.lastName === lastName
-    ) {
-      return true;
-    } else {
+    ) {return true;}
+     else {
       return false;
     }
   });
   // TODO: find the person single person object using the name they entered.
   return foundPerson;
 }
+function searchByTrait(people){
+  let eyeColor = promptFor("What is their eye color?",autoValid);
+  let height = promptFor("What is their height",autoValid);
+  let weight = promptFor("What is their weight", autoValid);
+  let gender = promptFor("What is their gender", autoValid);
+
+  let foundPerson = people.filter(function(potentialMatch){
+    if (potentialMatch.eyeColor === eyeColor)
+      {return true;}
+    else if (potentialMatch.height === height)
+      {return true;}
+    else if (potentialMatch.weight === weight)
+      {return true;}
+    else if(potentialMatch.gender === gender)
+      {return true;}
+    else {return false;};
+  });
+  return foundPerson;}
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people) {}
+
 
 //TODO: add other trait filter functions here.
 
