@@ -79,34 +79,14 @@ function searchByName(people) {
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
 
-  let foundPerson = people.filter(function (potentialMatch) {
-    if (
-      potentialMatch.firstName === firstName &&
-      potentialMatch.lastName === lastName
-    ) {return true;}
-     else {
-      return false;
-    }
+  let foundPerson = people.filter(function (potentialMatch){
+    if (potentialMatch.firstName === firstName &&potentialMatch.lastName === lastName) {return true;}
+     else {return false;}
   });
   // TODO: find the person single person object using the name they entered.
   return foundPerson;
 }
 function searchByTrait(people){
-<<<<<<< HEAD
-  let eyeColor = promptFor("What is their eye color?",autoValid);
-  // let height = promptFor("What is their height",autoValid);
-  // let weight = promptFor("What is their weight", autoValid);
-  // let gender = promptFor("What is their gender", autoValid);
-
-  let foundPerson = people.filter(function(potentialMatch){
-    if (potentialMatch.eyeColor === eyeColor)
-      {return true;}
-    else {return false;}
-  });
-  return foundPerson;}
-=======
-
-  
 
   let userInput = prompt("Which trait would you like to search for? eye color, height, weight, gender, occupation, DOB");
 
@@ -121,7 +101,15 @@ function searchByTrait(people){
       let weight = promptFor("What is their weight", autoValid);
       break;
     case "gender":
-      let gender = promptFor("What is their gender", autoValid);
+      function searchByGender(people){
+        let foundPerson = promptFor("What is their gender", autoValid);
+        foundPerson = people.filter(function (potentialMatch){
+          if(potentialMatch.gender=== "male"){return true};
+          else if(potentialMatch.gender ==="Female"){return true};
+          else{return false};
+        });
+      return foundPerson;
+      }
       break;
     case "occupation":
       let occupation = promptFor("What is their eye occupation?",autoValid);
@@ -133,11 +121,8 @@ function searchByTrait(people){
     default:
       return searchByTrait(people);
   }
- 
-
-
 } 
->>>>>>> 72ed562482f1ee6d480030ac047c1d6be6e3685f
+
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 
