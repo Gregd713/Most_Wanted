@@ -92,6 +92,7 @@ function searchByName(people) {
   return foundPerson;
 }
 function searchByTrait(people){
+<<<<<<< HEAD
   let eyeColor = promptFor("What is their eye color?",autoValid);
   // let height = promptFor("What is their height",autoValid);
   // let weight = promptFor("What is their weight", autoValid);
@@ -103,6 +104,40 @@ function searchByTrait(people){
     else {return false;}
   });
   return foundPerson;}
+=======
+
+  
+
+  let userInput = prompt("Which trait would you like to search for? eye color, height, weight, gender, occupation, DOB");
+
+  switch (userInput) {
+    case "eye color":
+      let eyeColor = promptFor("What is their eye color?",autoValid);
+      break;
+    case "height":
+      let height = promptFor("What is their height",autoValid);
+      break;
+    case "weight":
+      let weight = promptFor("What is their weight", autoValid);
+      break;
+    case "gender":
+      let gender = promptFor("What is their gender", autoValid);
+      break;
+    case "occupation":
+      let occupation = promptFor("What is their eye occupation?",autoValid);
+      break;
+    case "DOB":
+      let DOB = promptFor("What is their eye DOB?",autoValid);
+      break;
+
+    default:
+      return searchByTrait(people);
+  }
+ 
+
+
+} 
+>>>>>>> 72ed562482f1ee6d480030ac047c1d6be6e3685f
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 
