@@ -6,6 +6,7 @@
 //#region
 
 // app is the function called to start the entire application
+
 function app(people) {
   let searchType = promptFor(
     "Do you know the name of the person you are looking for? Enter 'yes' or 'no'",
@@ -92,20 +93,14 @@ function searchByName(people) {
 }
 function searchByTrait(people){
   let eyeColor = promptFor("What is their eye color?",autoValid);
-  let height = promptFor("What is their height",autoValid);
-  let weight = promptFor("What is their weight", autoValid);
-  let gender = promptFor("What is their gender", autoValid);
+  // let height = promptFor("What is their height",autoValid);
+  // let weight = promptFor("What is their weight", autoValid);
+  // let gender = promptFor("What is their gender", autoValid);
 
   let foundPerson = people.filter(function(potentialMatch){
     if (potentialMatch.eyeColor === eyeColor)
       {return true;}
-    else if (potentialMatch.height === height)
-      {return true;}
-    else if (potentialMatch.weight === weight)
-      {return true;}
-    else if(potentialMatch.gender === gender)
-      {return true;}
-    else {return false;};
+    else {return false;}
   });
   return foundPerson;}
 
