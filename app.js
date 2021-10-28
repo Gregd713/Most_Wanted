@@ -37,7 +37,7 @@ function mainMenu(person, people) {
     alert("Could not find that individual.");
     return app(people); // restart
   }
-
+  else{alert(searchByGender())}
   let displayOption = promptFor(
     "Found " +
       person[0].firstName +
@@ -101,15 +101,7 @@ function searchByTrait(people){
       let weight = promptFor("What is their weight", autoValid);
       break;
     case "gender":
-      function searchByGender(people){
-        let foundPerson = promptFor("What is their gender", autoValid);
-        foundPerson = people.filter(function (potentialMatch){
-          if(potentialMatch.gender=== "male"){return true};
-          else if(potentialMatch.gender ==="Female"){return true};
-          else{return false};
-        });
-      return foundPerson;
-      }
+      let result = searchByGender(people)
       break;
     case "occupation":
       let occupation = promptFor("What is their eye occupation?",autoValid);
@@ -146,6 +138,7 @@ function displayPeople(people) {
       .join("\n")
   );
 }
+
 
 function displayPerson(person) {
   // print all of the information about a person:
@@ -197,3 +190,14 @@ function autoValid(input) {
 function customValidation(input) {}
 
 //#endregion
+function searchByGender(people){
+  let foundPerson = promptFor("What is their gender", autoValid);
+  foundPerson = people.filter(function (potentialMatch){
+    if(potentialMatch.gender=== foundPerson){return true}
+    else if(potentialMatch.gender === foundPerson){return true}
+  });
+mainMenu(foundPerson,people);
+}
+
+
+
