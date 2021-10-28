@@ -6,6 +6,7 @@
 //#region
 
 // app is the function called to start the entire application
+
 function app(people) {
   let searchType = promptFor(
     "Do you know the name of the person you are looking for? Enter 'yes' or 'no'",
@@ -36,7 +37,7 @@ function mainMenu(person, people) {
     alert("Could not find that individual.");
     return app(people); // restart
   }
-
+  else{alert(searchByGender())}
   let displayOption = promptFor(
     "Found " +
       person[0].firstName +
@@ -78,21 +79,14 @@ function searchByName(people) {
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
 
-  let foundPerson = people.filter(function (potentialMatch) {
-    if (
-      potentialMatch.firstName === firstName &&
-      potentialMatch.lastName === lastName
-    ) {return true;}
-     else {
-      return false;
-    }
+  let foundPerson = people.filter(function (potentialMatch){
+    if (potentialMatch.firstName === firstName &&potentialMatch.lastName === lastName) {return true;}
+     else {return false;}
   });
   // TODO: find the person single person object using the name they entered.
   return foundPerson;
 }
 function searchByTrait(people){
-
-  
 
   let userInput = prompt("Which trait would you like to search for? eye color, height, weight, gender, occupation, DOB");
 
@@ -107,7 +101,7 @@ function searchByTrait(people){
       let weight = promptFor("What is their weight", autoValid);
       break;
     case "gender":
-      let gender = promptFor("What is their gender", autoValid);
+      let result = searchByGender(people)
       break;
     case "occupation":
       let occupation = promptFor("What is their eye occupation?",autoValid);
@@ -119,10 +113,8 @@ function searchByTrait(people){
     default:
       return searchByTrait(people);
   }
- 
-
-
 } 
+
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 
@@ -146,6 +138,7 @@ function displayPeople(people) {
       .join("\n")
   );
 }
+
 
 function displayPerson(person) {
   // print all of the information about a person:
@@ -210,3 +203,14 @@ function searchByOccupation(people) {
 
 
 //#endregion
+function searchByGender(people){
+  let foundPerson = promptFor("What is their gender", autoValid);
+  foundPerson = people.filter(function (potentialMatch){
+    if(potentialMatch.gender=== foundPerson){return true}
+    else if(potentialMatch.gender === foundPerson){return true}
+  });
+mainMenu(foundPerson,people);
+}
+
+
+
