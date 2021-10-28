@@ -196,4 +196,17 @@ function autoValid(input) {
 //can be used for things like eye color validation for example.
 function customValidation(input) {}
 
+
+function searchByOccupation(people) {
+  let foundPerson = promptFor("what is their occupation?", autoValid);
+  foundPerson = people.filter(function (potentialMatch) {
+    if(potentialMatch.occupation === foundPerson) {
+      return true
+    }
+  });
+}
+
+
+
+
 //#endregion
