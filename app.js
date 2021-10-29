@@ -91,7 +91,8 @@ function searchByTrait(people){
   switch (userInput) {
     case "eye color":
       result = searchByEyeColor(people)
-      displayPeople(result);
+      chosen(result);
+    
       break;
     case "height":
       result = searchByheight(people)
@@ -143,7 +144,15 @@ function displayPeople(people) {
       .join("\n")
   );
 }
-
+function chosen(people){
+  promptFor("Please select which of the following individual's information you would like to display"+"\n\n"+
+    people
+      .map(function (person) {
+        return person.firstName + " " + person.lastName;
+      })
+      .join("\n")
+  );
+}
 
 function displayPerson(person) {
   // print all of the information about a person:
@@ -206,6 +215,7 @@ function searchByWeight(people) {
   }); return foundGroup;
 }
 
+
 function searchByheight(people) {
   let foundPerson = promptFor("How tall is the individual's height? (in inches. ie: 69)", autoValid);
   let foundGroup;
@@ -221,7 +231,7 @@ function searchByheight(people) {
 function searchByDOB(people) {
   let foundPerson = promptFor("When is their birthday? (mm/dd/yyyy)", autoValid);
   let number;
-  number = parseInt(foundPerson);
+  number = Date.parse(foundPerson);
   let foundGroup;
   foundGroup = people.filter(function (potentialMatch) {
     if(potentialMatch.dob === foundPerson){return true}
