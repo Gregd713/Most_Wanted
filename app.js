@@ -50,7 +50,7 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      // TODO: get person's info
+      let info = people.filter()
       break;
     case "family":
       // TODO: get person's family
@@ -105,7 +105,7 @@ function searchByTrait(people){
       result = searchByGender(people)
       break;
     case "occupation":
-      let occupation = promptFor("What is their eye occupation?",autoValid);
+      let occupation = PushSubscriptionOptions(people.occupation)
       break;
     case "DOB":
       let DOB = promptFor("What is their eye DOB?",autoValid);
@@ -191,8 +191,60 @@ function autoValid(input) {
 //can be used for things like eye color validation for example.
 function customValidation(input) {}
 
+
+function searchByWeight(people) {
+  let foundPerson = promptFor("what is their occupation?", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch) {
+    if(potentialMatch.weight === foundPerson) {
+      return true}
+  }); return searchByOccupation(foundGroup);
+}
+
+function searchByheight(people) {
+  let foundPerson = promptFor("what is their occupation?", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch) {
+    if(potentialMatch.height === foundPerson) {
+      return true}
+  }); return searchByOccupation(foundGroup);
+}
+
+
+function searchByDOB(people) {
+  let foundPerson = promptFor("what is their occupation?", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch) {
+    if(potentialMatch.dob === foundPerson) {
+      return true}
+  }); return searchByOccupation(foundGroup);
+}
+
+
+function searchByEyeColor(people) {
+  let foundPerson = promptFor("what is their occupation?", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch) {
+    if(potentialMatch.eyeColor === foundPerson) {
+      return true}
+  }); return searchByOccupation(foundGroup);
+}
+
+
+function searchByOccupation(people) {
+  let foundPerson = promptFor("what is their occupation?", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch) {
+    if(potentialMatch.occupation === foundPerson) {
+      return true}
+  }); return searchByOccupation(foundGroup);
+}
+
+
+
 //#endregion
 function searchByGender(people){
+<<<<<<< HEAD
   let findPerson = promptFor("What is their gender", autoValid);
   let foundGroup;
   foundGroup = people.filter(function (potentialMatch){
@@ -201,3 +253,19 @@ function searchByGender(people){
   });
  return foundGroup;
 }
+=======
+  let foundPerson = promptFor("What is their gender", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch){
+    if(potentialMatch.gender=== foundPerson){return true}
+    else if(potentialMatch.gender === foundPerson){
+      return true};
+  }); return searchByGender(foundGroup);
+}
+
+
+  mainMenu(foundPerson,people);
+
+
+
+>>>>>>> c00efc25be3b900f499774a3dea5bb329dffe53f
