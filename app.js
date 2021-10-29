@@ -24,7 +24,9 @@ function app(people) {
       app(people); // restart app
       break;
   }
-
+alert(JSON.stringify(searchResults));
+alert(searchResults[0].firstName+" "+searchResults[0].lastName);
+alert(searchResults.join("\n"));
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
@@ -37,7 +39,6 @@ function mainMenu(person, people) {
     alert("Could not find that individual.");
     return app(people); // restart
   }
-  else{alert(searchByGender())}
   let displayOption = promptFor(
     "Found " +
       person[0].firstName +
@@ -89,7 +90,7 @@ function searchByName(people) {
 function searchByTrait(people){
 
   let userInput = prompt("Which trait would you like to search for? eye color, height, weight, gender, occupation, DOB");
-
+  let result;
   switch (userInput) {
     case "eye color":
       let eyeColor = promptFor("What is their eye color?",autoValid);
@@ -101,7 +102,7 @@ function searchByTrait(people){
       let weight = promptFor("What is their weight", autoValid);
       break;
     case "gender":
-      let result = searchByGender(people)
+      result = searchByGender(people)
       break;
     case "occupation":
       let occupation = promptFor("What is their eye occupation?",autoValid);
@@ -113,6 +114,7 @@ function searchByTrait(people){
     default:
       return searchByTrait(people);
   }
+  return result;
 } 
 
 
@@ -191,13 +193,11 @@ function customValidation(input) {}
 
 //#endregion
 function searchByGender(people){
-  let foundPerson = promptFor("What is their gender", autoValid);
-  foundPerson = people.filter(function (potentialMatch){
-    if(potentialMatch.gender=== foundPerson){return true}
-    else if(potentialMatch.gender === foundPerson){return true}
+  let findPerson = promptFor("What is their gender", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch){
+    if(potentialMatch.gender=== findPerson){return true}
+    else if(potentialMatch.gender=== findPerson){return true}
   });
-mainMenu(foundPerson,people);
+ return foundGroup;
 }
-
-
-
