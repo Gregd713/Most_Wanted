@@ -49,7 +49,7 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      // TODO: get person's info
+      let info = people.filter()
       break;
     case "family":
       // TODO: get person's family
@@ -89,7 +89,7 @@ function searchByName(people) {
 function searchByTrait(people){
 
   let userInput = prompt("Which trait would you like to search for? eye color, height, weight, gender, occupation, DOB");
-
+  let result;
   switch (userInput) {
     case "eye color":
       let eyeColor = promptFor("What is their eye color?",autoValid);
@@ -104,7 +104,7 @@ function searchByTrait(people){
       let result = searchByGender(people)
       break;
     case "occupation":
-      let occupation = promptFor("What is their eye occupation?",autoValid);
+      let occupation = PushSubscriptionOptions(people.occupation)
       break;
     case "DOB":
       let DOB = promptFor("What is their eye DOB?",autoValid);
@@ -190,27 +190,69 @@ function autoValid(input) {
 function customValidation(input) {}
 
 
-function searchByOccupation(people) {
+function searchByWeight(people) {
   let foundPerson = promptFor("what is their occupation?", autoValid);
-  foundPerson = people.filter(function (potentialMatch) {
-    if(potentialMatch.occupation === foundPerson) {
-      return true
-    }
-  });
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch) {
+    if(potentialMatch.weight === foundPerson) {
+      return true}
+  }); return searchByOccupation(foundGroup);
 }
 
+function searchByheight(people) {
+  let foundPerson = promptFor("what is their occupation?", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch) {
+    if(potentialMatch.height === foundPerson) {
+      return true}
+  }); return searchByOccupation(foundGroup);
+}
+
+
+function searchByDOB(people) {
+  let foundPerson = promptFor("what is their occupation?", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch) {
+    if(potentialMatch.dob === foundPerson) {
+      return true}
+  }); return searchByOccupation(foundGroup);
+}
+
+
+function searchByEyeColor(people) {
+  let foundPerson = promptFor("what is their occupation?", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch) {
+    if(potentialMatch.eyeColor === foundPerson) {
+      return true}
+  }); return searchByOccupation(foundGroup);
+}
+
+
+function searchByOccupation(people) {
+  let foundPerson = promptFor("what is their occupation?", autoValid);
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch) {
+    if(potentialMatch.occupation === foundPerson) {
+      return true}
+  }); return searchByOccupation(foundGroup);
+}
 
 
 
 //#endregion
 function searchByGender(people){
   let foundPerson = promptFor("What is their gender", autoValid);
-  foundPerson = people.filter(function (potentialMatch){
+  let foundGroup;
+  foundGroup = people.filter(function (potentialMatch){
     if(potentialMatch.gender=== foundPerson){return true}
-    else if(potentialMatch.gender === foundPerson){return true}
-  });
-mainMenu(foundPerson,people);
+    else if(potentialMatch.gender === foundPerson){
+      return true};
+  }); return searchByGender(foundGroup);
 }
+
+
+  mainMenu(foundPerson,people);
 
 
 
