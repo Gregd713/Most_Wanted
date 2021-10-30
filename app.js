@@ -25,13 +25,14 @@ function app(people) {
       break;
   }
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+  console.log(28);
   mainMenu(searchResults, people);
 }
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people) {
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
-
+  console.log(person);
   if (!person) {
     alert("Could not find that individual.");
     return app(people); // restart
@@ -96,23 +97,23 @@ function searchByTrait(people){
       break;
     case "height":
       result = searchByheight(people)
-      displayPeople(result);
+      chosen(result);
       break;
     case "weight":
       result = searchByWeight(people)
-      displayPeople(result);
+      chosen(result);
       break;
     case "gender":
       result = searchByGender(people)
-      displayPeople(result);
+      chosen(result);
       break;
     case "occupation":
       result = searchByOccupation(people)
-      displayPeople(result);
+      chosen(result);
       break;
     case "DOB":
       result = searchByDOB(people)
-      displayPeople(result);
+      chosen(result);
       break;
 
     default:
@@ -145,20 +146,37 @@ function displayPeople(people) {
   );
 }
 function chosen(people){
-  promptFor("Please select which of the following individual's information you would like to display"+"\n\n"+
-    people
-      .map(function (person) {
-        return person.firstName + " " + person.lastName;
+  let chosenPerson = promptFor("Please select the number of the following individual's information you would like to display"+"\n\n"+
+   people
+      .map(function (person, index) {
+        return index + "-" + person.firstName + " " + person.lastName;
+      
       })
       .join("\n")
-  );
+  ); 
+      displayPerson(people[chosenPerson], people);
 }
 
-function displayPerson(person) {
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
+function displayPerson(person, people) {
+  
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
+  personInfo += "Eye color: " + person.eyeColor + "\n";
+
+  if(person.parents.length === 0){
+    personInfo += "Parents: (none) \n";
+  } else {
+    let parentsObject = searchParentsByID(person.parents, people);
+    personInfo += "Parents:" + parentsObject[0].firstName + " " + parentsObject[0].lastName;
+  }
+
+
+  
+
+
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
@@ -179,7 +197,8 @@ function promptFor(question, valid) {
   let response;
   do {
    response = prompt(question).trim();
-    isValid = valid(response);
+    // isValid = valid(response);
+    isValid = true;
   } while (response === "" || isValid === false);
   return response;
 }
@@ -202,6 +221,43 @@ function autoValid(input) {
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input) {}
+
+function searchParentsByID(parentID, people) {
+  let foundGroup;
+  let parentArray = [];
+  // foundGroup = people.map(function (potentialMatch) {
+  //   if(potentialMatch.id === parentID[0]) {
+  //     parentArray.push(potentialMatch);
+  //   } else if(parentID.length > 1 && potentialMatch.id === parentID[1]) {
+  //     parentArray.push(potentialMatch);
+  //   }
+
+  // }); 
+
+  console.log(parentID[0]);
+  console.log(parentID[1]);
+  people.map(function (potentialMatch) {
+   console.log(potentialMatch.id);
+   console.log(potentialMatch.id === parentID[0]);
+   console.log(potentialMatch.id == parentID[0]);
+    if(potentialMatch.id === parentID[0]) {
+          parentArray.push(potentialMatch);
+          console.log(0)
+        } 
+  });
+
+  people.map(function (potentialMatch) {
+    if(parentID[1] && potentialMatch.id === parentID[1]) {
+          parentArray.push(potentialMatch);
+          console.log(1)
+        } 
+
+  });
+  console.log(parentArray);
+  return parentArray;
+}
+
+
 
 
 function searchByWeight(people) {
