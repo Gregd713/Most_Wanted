@@ -7,6 +7,8 @@
 
 // app is the function called to start the entire application
 
+
+
 function app(people) {
   let searchType = promptFor(
     "Do you know the name of the person you are looking for? Enter 'yes' or 'no'",
@@ -25,7 +27,6 @@ function app(people) {
       break;
   }
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  console.log(28);
   mainMenu(searchResults, people);
 }
 
@@ -162,8 +163,7 @@ function chosen(people){
       displayPerson(people[chosenPerson], people);
 }
 
-function displayPerson(person, people) {
-  
+function displayPerson(person) {
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Height: " + person.height + "\n";
@@ -174,12 +174,16 @@ function displayPerson(person, people) {
   if(person.parents.length === 0){
     personInfo += "Parents: (none) \n";
   } else {
-    let parentsObject = searchParentsByID(person.parents, people);
-    personInfo += "Parents:" + parentsObject[0].firstName + " " + parentsObject[0].lastName;
+    personInfo += "Parents: " + getNamesByID(person.parents) + "\n";
   }
 
+  if(person.currentSpouse.length === 0){
+    personInfo += "Spouse: (none) \n";
+  } else {
+    personInfo += "Spouse: " + getNamesByID([person.currentSpouse]) + "\n";
+  }
 
-  
+ 
 
 
   // TODO: finish getting the rest of the information to display.
@@ -227,39 +231,19 @@ function autoValid(input) {
 //can be used for things like eye color validation for example.
 function customValidation(input) {}
 
-function searchParentsByID(parentID, people) {
-  let foundGroup;
-  let parentArray = [];
-  // foundGroup = people.map(function (potentialMatch) {
-  //   if(potentialMatch.id === parentID[0]) {
-  //     parentArray.push(potentialMatch);
-  //   } else if(parentID.length > 1 && potentialMatch.id === parentID[1]) {
-  //     parentArray.push(potentialMatch);
-  //   }
-
-  // }); 
-
-  console.log(parentID[0]);
-  console.log(parentID[1]);
-  people.map(function (potentialMatch) {
-   console.log(potentialMatch.id);
-   console.log(potentialMatch.id === parentID[0]);
-   console.log(potentialMatch.id == parentID[0]);
-    if(potentialMatch.id === parentID[0]) {
-          parentArray.push(potentialMatch);
-          console.log(0)
-        } 
+function getNamesByID(idArray) {
+  let returnNames = "";
+   data.map(function (potentialMatch) {
+    for(let i = 0; i < idArray.length; i++) {
+      if(Number(potentialMatch.id) === Number(idArray[i])) {
+        if(returnNames.length){
+          returnNames += ", ";
+        }
+         returnNames += potentialMatch.firstName + " " + potentialMatch.lastName;
+      } 
+    }
   });
-
-  people.map(function (potentialMatch) {
-    if(parentID[1] && potentialMatch.id === parentID[1]) {
-          parentArray.push(potentialMatch);
-          console.log(1)
-        } 
-
-  });
-  console.log(parentArray);
-  return parentArray;
+  return returnNames;
 }
 
 
@@ -331,4 +315,16 @@ function searchByGender(people){
     else if(potentialMatch.gender=== findPerson){return true}
   });
  return foundGroup;
+}
+
+function getSiblingID(parentID){
+let siblingID = [];
+data.map(function (potentialMatch){
+  if(potentialMatch.parents === parentID){
+    siblingID.push(potentialMatch.id);
+  }
+
+
+});
+  return siblingID
 }
