@@ -171,12 +171,15 @@ function displayPerson(person) {
   } else {
     personInfo += "Parents: " + getNamesByID(person.parents) + "\n";
   }
-
-  if(person.currentSpouse.length === 0){
-    personInfo += "Spouse: (none) \n";
-  } else {
+  if(person.currentSpouse){
     personInfo += "Spouse: " + getNamesByID([person.currentSpouse]) + "\n";
   }
+  else {
+    personInfo += "Spouse: (none) \n";
+  }
+
+  personInfo += "Siblings: " + getNamesByID(getSiblingID(person.parents, person.id)) + "\n";
+  
 
  
 
@@ -312,14 +315,16 @@ function searchByGender(people){
  return foundGroup;
 }
 
-function getSiblingID(parentID){
+function getSiblingID(parentID, self){
 let siblingID = [];
+console.log(parentID);
 data.map(function (potentialMatch){
-  if(potentialMatch.parents === parentID){
+  console.log(potentialMatch.firstName);
+  if(JSON.stringify(potentialMatch.parents) === JSON.stringify(parentID) && potentialMatch.id !== self) {
+    console.log("found a match");
     siblingID.push(potentialMatch.id);
   }
-
-
 });
-  return siblingID
+  console.log(siblingID);
+  return siblingID;
 }
