@@ -90,11 +90,12 @@ function searchByTrait(people){
 
   let userInput = prompt("Which trait would you like to search for? eye color, height, weight, gender, occupation, DOB");
   let result;
+  let choice;
   switch (userInput) {
     case "eye color":
       result = searchByEyeColor(people)
-      chosen(result);
-    
+      choice =displayPeople(result);
+      chosen(choice);
       break;
     case "height":
       result = searchByheight(people)
@@ -120,7 +121,7 @@ function searchByTrait(people){
     default:
       return searchByTrait(people);
   }
-  return result;
+  return choice;
 } 
 
 
@@ -138,14 +139,14 @@ function searchByTrait(people){
 
 // alerts a list of people
 function displayPeople(people) {
-  alert(
+  let pick =prompt("Please choose from the following list of people, found matching your search criteria, you would like to view more information on: "+"\n\n"+
     people
       .map(function (person) {
         return person.firstName + " " + person.lastName;
       })
       .join("\n")
   );
-}
+return pick}
 function chosen(people){
   let chosenPerson = promptFor("Please select the number of the following individual's information you would like to display"+"\n\n"+
    people
