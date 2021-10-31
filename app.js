@@ -103,11 +103,7 @@ function searchByTrait(people){
       break;
     case "weight":
       result = searchByWeight(people)
-<<<<<<< HEAD
-      choice =displayPeople(result);
-=======
       chosen(result);
->>>>>>> 63f6ef8febc7c0a75fc369608b2ecc26ea0002f9
       break;
     case "gender":
       result = searchByGender(people)
