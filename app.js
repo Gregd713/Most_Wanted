@@ -22,6 +22,7 @@ function app(people) {
       break;
     case "no": //search by trait function
       searchResults = searchByTrait(people);
+      restartApp(people)
       break;
     default:
       app(people); // restart app
@@ -29,6 +30,16 @@ function app(people) {
   }
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   // mainMenu(searchResults, people);
+}
+function restartApp(people){
+  let response = promptFor("Would you like to search for someone else?",yesNo).toLocaleLowerCase();
+  switch(response){
+    case "yes":
+      app(people);//restart app
+    case "no":
+      alert("Thank you for searching, goodbye!")
+      return;
+  }
 }
 
 // Menu function to call once you find who you are looking for
