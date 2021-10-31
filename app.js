@@ -61,10 +61,10 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      let info = people.filter()
+      displayPerson(person[0], false);
       break;
     case "family":
-      // TODO: get person's family
+      displayPerson(person[0], true);
       break;
     case "descendants":
       // TODO: get person's descendants
@@ -166,18 +166,19 @@ function chosen(people){
       })
       .join("\n")
   ); 
-      displayPerson(people[chosenPerson], people);
+      displayPerson(people[chosenPerson], false);
 }
 
-function displayPerson(person) {
+function displayPerson(person, family) {
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  if(family === false) {
   personInfo += "Age: " + calculateAge(person.dob) + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Eye color: " + person.eyeColor + "\n";
-
+  }
   if(person.parents.length === 0){
     personInfo += "Parents: (none) \n";
   } else {
