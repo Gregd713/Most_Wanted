@@ -90,12 +90,10 @@ function searchByTrait(people){
 
   let userInput = prompt("Which trait would you like to search for? eye color, height, weight, gender, occupation, DOB");
   let result;
-  let choice;
   switch (userInput) {
     case "eye color":
       result = searchByEyeColor(people)
-      choice =displayPeople(result);
-      chosen(choice);
+      chosen(result);
       break;
     case "height":
       result = searchByheight(people)
@@ -121,7 +119,7 @@ function searchByTrait(people){
     default:
       return searchByTrait(people);
   }
-  return choice;
+  return result;
 } 
 
 
