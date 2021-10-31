@@ -18,6 +18,7 @@ function app(people) {
   switch (searchType) {
     case "yes":
       searchResults = searchByName(people);
+      mainMenu(searchResults, people);
       break;
     case "no": //search by trait function
       searchResults = searchByTrait(people);
@@ -27,7 +28,7 @@ function app(people) {
       break;
   }
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
+  // mainMenu(searchResults, people);
 }
 
 // Menu function to call once you find who you are looking for
@@ -80,7 +81,7 @@ function searchByName(people) {
   let lastName = promptFor("What is the person's last name?", autoValid);
 
   let foundPerson = people.filter(function (potentialMatch){
-    if (potentialMatch.firstName === firstName &&potentialMatch.lastName === lastName) {return true;}
+    if (potentialMatch.firstName === firstName && potentialMatch.lastName === lastName) {return true;}
      else {return false;}
   });
   // TODO: find the person single person object using the name they entered.
@@ -90,12 +91,10 @@ function searchByTrait(people){
 
   let userInput = prompt("Which trait would you like to search for? eye color, height, weight, gender, occupation, DOB");
   let result;
-  let choice;
   switch (userInput) {
     case "eye color":
       result = searchByEyeColor(people)
-      choice =displayPeople(result);
-      chosen(choice);
+      chosen(result);
       break;
     case "height":
       result = searchByheight(people)
@@ -121,7 +120,7 @@ function searchByTrait(people){
     default:
       return searchByTrait(people);
   }
-  return choice;
+  return result;
 } 
 
 
@@ -162,6 +161,7 @@ function chosen(people){
 function displayPerson(person) {
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Age: " + calculateAge(person.dob) + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
@@ -178,14 +178,9 @@ function displayPerson(person) {
   else {
     personInfo += "Spouse: (none) \n";
   }
-
-  personInfo += "Siblings: " + getNamesByID(getSiblingID(person.parents, person.id)) + "\n";
+  let siblingDisplay = getNamesByID(getSiblingID(person.parents, person.id)) || "(none)";
+  personInfo += "Siblings: " + siblingDisplay + "\n";
   
-
- 
-
-
-  // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
 
@@ -318,14 +313,30 @@ function searchByGender(people){
 
 function getSiblingID(parentID, self){
 let siblingID = [];
-console.log(parentID);
 data.map(function (potentialMatch){
-  console.log(potentialMatch.firstName);
-  if(JSON.stringify(potentialMatch.parents) === JSON.stringify(parentID) && potentialMatch.id !== self) {
-    console.log("found a match");
+  if(potentialMatch.parents.length && JSON.stringify(potentialMatch.parents) === JSON.stringify(parentID) && potentialMatch.id !== self) {
     siblingID.push(potentialMatch.id);
   }
 });
-  console.log(siblingID);
   return siblingID;
 }
+
+function calculateAge(dob){
+
+  let birthDate = new Date(dob);
+
+  // get difference from current date;
+  let difference = Date.now() - birthDate.getTime(); 
+    
+  let  ageDate = new Date(difference); 
+  let calculateAge = Math.abs(ageDate.getUTCFullYear() - 1970);
+  return calculateAge;
+}
+
+
+
+
+
+
+
+
