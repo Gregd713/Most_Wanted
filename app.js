@@ -19,6 +19,7 @@ function app(people) {
     case "yes":
       searchResults = searchByName(people);
       mainMenu(searchResults, people);
+      restartApp(people)
       break;
     case "no": //search by trait function
       searchResults = searchByTrait(people);
@@ -39,6 +40,8 @@ function restartApp(people){
     case "no":
       alert("Thank you for searching, goodbye!")
       return;
+    default:
+      restartApp(people);
   }
 }
 
@@ -67,7 +70,7 @@ function mainMenu(person, people) {
       displayPerson(person[0], true);
       break;
     case "descendants":
-      // TODO: get person's descendants
+      descendantsGenerator(person,true);
       break;
     case "restart":
       app(people); // restart
@@ -167,6 +170,15 @@ function chosen(people){
       .join("\n")
   ); 
       displayPerson(people[chosenPerson], false);
+}
+
+function descendantsGenerator(person,family){
+  if(family===true){
+  let personInfo = "First Name: " + person.firstName + "\n";
+  personInfo += "Last Name: " + person.lastName + "\n";
+  let DescendantDisplay = getNamesByID(getDescendantID(person.id, person.parents)) || "(none)";
+  personInfo += "Descendants: " + DescendantDisplay + "\n";
+  alert(personInfo)}
 }
 
 function displayPerson(person, family) {
@@ -332,6 +344,16 @@ data.map(function (potentialMatch){
 });
   return siblingID;
 }
+
+function getDescendantID(parentID, self){
+  let descendantID = [];
+  data.map(function (potentialMatch){
+    if(potentialMatch.id && JSON.stringify(potentialMatch.id) === JSON.stringify(parentID) && potentialMatch.id !== self) {
+     descendantID.push(potentialMatch.id);
+    }
+  });
+    return descendantID;
+  }
 
 function calculateAge(dob){
 
